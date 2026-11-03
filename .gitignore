@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.env
+*.env
+*.log
+# built from app/farm-database-ps.html by "npm run prepare-ui" (Render does this automatically)
+ui/index.html
+ui/vendor/
+# NEVER put the license generator or its private key into GitHub
+license-private*
+*private*.pem
+*private*.key
+farm-license-tool/
+# backups / local data
+farm-backup-*.json
+*.before-import-*.json

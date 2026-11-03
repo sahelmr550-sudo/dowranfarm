@@ -1,0 +1,66 @@
+{
+  "name": "farm-database-desktop",
+  "productName": "Farm Database",
+  "version": "1.0.0",
+  "description": "Farm database desktop application (Electron + Node.js + MongoDB, fully offline)",
+  "main": "main.js",
+  "scripts": {
+    "prepare-ui": "node scripts/prepare-ui.js",
+    "start": "npm run prepare-ui && electron .",
+    "web": "node server/web.js",
+    "cloud": "node server/cloud.js",
+    "setup-db": "node scripts/setup-db.js",
+    "selftest": "node scripts/selftest.js",
+    "selftest:fake": "node scripts/selftest.js --fake && node scripts/selftest.js --file && node scripts/test-file-db.js && node scripts/test-web.js && node scripts/test-lan.js && node scripts/test-cloud.js && node scripts/test-license.js && node scripts/test-mongo-launcher.js",
+    "check-mongodb": "node scripts/diagnose-mongo.js",
+    "test:license": "node scripts/test-license.js",
+    "test:lan": "node scripts/test-lan.js",
+    "license-status": "node scripts/license-status.js",
+    "import-backup": "node scripts/import-backup.js",
+    "dist": "npm run prepare-ui && electron-builder --win nsis",
+    "copy-to-atlas": "node scripts/copy-to-atlas.js",
+    "test:cloud": "node scripts/test-cloud.js"
+  },
+  "dependencies": {
+    "mongodb": "^6.8.0",
+    "xlsx-js-style": "1.2.0"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.farm.database",
+    "productName": "Farm Database",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "server/**",
+      "ui/**",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": false
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
